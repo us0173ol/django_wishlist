@@ -16,7 +16,7 @@ set visited=False to visited=True and moving that place to the visited page -->
 <div>
     <form class="visited-text" method="POST" action="{% url "place_is_visited" %}">
     <span id="place-name-{{ place.pk }}" class="visited-text">{{ place.name }}</span>
-    <p><a href="{% url place_to_visit pk=place.pk %}"></a></p>
+    <p><a href="{% url 'place_to_visit' pk=place.pk %}"></a></p>
 
         {% csrf_token %}
         <input type="hidden" name="pk" value="{{ place.pk }}">

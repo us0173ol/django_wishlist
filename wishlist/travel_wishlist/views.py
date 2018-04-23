@@ -16,8 +16,8 @@ def place_list(request):
 
     if request.method == 'POST':
         place_form = NewPlaceForm(request.POST)
-        place = form.save(commit = False)  #create a new Place object from the form
-        if form.is_valid():  #Checks for DB constraints violated
+        place = place_form.save(commit = False)  #create a new Place object from the form
+        if place_form.is_valid():  #Checks for DB constraints violated
             place.save()     #Saves the place to the database
             return redirect('place_list')  #Redirect to a GET request for this same route
 
@@ -25,9 +25,9 @@ def place_list(request):
     # a page with a list of places and a form to add a new place IE wishlist.html.
     places = Place.objects.filter(visited=False).order_by('name')
     place_form = NewPlaceForm()
-    return render(request, 'travel_wishlist/wishlist.html', {'places' : places, 'place_form': place_form })
+    return render(request, 'travel_wishlist/wishlist.html', {'places' : places, 'new_place_form': place_form })
 
-    # if place is marked as visited, take user to
+# if place is marked as visited, take user to
 def places_visited(request):
     visited = Place.objects.filter(visited=True)
     return render(request, 'travel_wishlist/visited.html', {'visited': visited})
